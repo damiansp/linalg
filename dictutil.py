@@ -10,6 +10,30 @@ def listrange2dict(L):
     return {k: v for k, v in enumerate(L)}
 
 
+def make_inverse_index(strlist):
+    out = {}
+    for i, s in enumerate(strlist):
+        for word in s.split():
+            out[word] = out.get(word, set()).union({i})
+    return out
+
+
+def or_search(inv_index, query):
+    out = set()
+    for word in query:
+        out = out.union(inv_index.get(word, set()))
+    return out
+
+
+def and_search(inv_index, query):
+    out = inv_index[query[0]]
+    if len(query) > 1:
+        for word in query[1:]:
+            out = out.intersection(inv_index.get(word, set()))
+    return out
+
+
+
 if __name__ == '__main__':
     def test():
         test_dict2_list()
