@@ -5,11 +5,12 @@ L_EYE = 2 + 2j
 R_EYE = 3 + 2j
 MOUTH = [r + 1j for r in np.linspace(1.75, 3.25, num=7)]
 S = [L_EYE] + [R_EYE] + MOUTH
+I = 0 + 1j
 
 
 def plot(S: list[complex], lim, **kwargs):
-    reals = [x.real for x in S]
-    imags = [x.imag for x in S]
+    reals = [z.real for z in S]
+    imags = [z.imag for z in S]
     plt.scatter(reals, imags, **kwargs)
     plt.xlim([-lim, lim])
     plt.ylim([-lim, lim])
@@ -23,11 +24,14 @@ def translate(S: list[complex], z: complex) -> list[complex]:
 
 
 def scale(S: list[complex], k) -> list[complex]:
-    return [k * x for x in S]
+    return [k * z for z in S]
 
 
 def rotate90(S: list[complex]) -> list[complex]:
-    return [(0 + 1j) * x for x in S]
+    return [(0 + 1j) * z for z in S]
+
+def rotate(S: list[complex], rad) -> list[complex]:
+    return [z * np.exp(rad * I) for z in S]
     
 
 
@@ -36,4 +40,5 @@ if __name__ == '__main__':
     plot(translate(S, 1 + 2j), 5)
     plot(scale(S, 1/2), 5)
     plot(rotate90(S), 5)
+    plot(rotate(S, np.pi / 4), 5)
 

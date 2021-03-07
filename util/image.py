@@ -13,7 +13,6 @@ and display them with a web browser.
 # To do: check types of arguments, check that image has no alpha channel
 # Note that right now, we ignore the alpha channel, but allow it. - @dbp
 
-import png
 import numbers
 import collections
 
@@ -22,6 +21,8 @@ import webbrowser
 import tempfile
 import os
 import atexit
+
+import png
 
 # Round color coordinate to nearest int and clamp to [0, 255]
 def _color_int(col):
