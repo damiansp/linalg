@@ -48,6 +48,11 @@ def neg(v):
     return v.scalar_mul(-1)
 
 
+def list_dot(u, v):
+    '''Dot-product of two vectors supplied as lists'''
+    assert len(u) == len(v), 'vectors must have equal length'
+    return sum([x * y for x, y in zip(u, v)]
+
 # Test
 v = Vec({'A', 'B', 'C'}, {'A': 1, 'B': 2, 'C': 3})
 b = v.scalar_mul(3)
